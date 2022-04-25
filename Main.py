@@ -11,17 +11,24 @@ board = [
 ]
 
 # Print the Board
-def print_board(puzzle):
-    for x in range(len(puzzle)):
+def print_board(Puzzle):
+    for x in range(len(Puzzle)):
         if x % 3 == 0 and x != 0:
             print("- - - - - - - - - - - - - ")
 
-        for y in range(len(puzzle[0])):
+        for y in range(len(Puzzle[0])):
             if y % 3 == 0 and y != 0:
                 print(" | ", end="")
 
             if y == 8:
-                print(puzzle[x][y])
+                print(Puzzle[x][y])
             else:
-                print(str(puzzle[x][y]) + " ", end="")
-print_board(board)
+                print(str(Puzzle[x][y]) + " ", end="")
+# print_board(board)
+
+def isEmpty(Puzzle):
+    for x in range(len(Puzzle)):
+        for y in range(len(Puzzle[0])):
+            if Puzzle[x][y] == 0:
+                return (x, y)  # row, colum
+
