@@ -1,3 +1,14 @@
+from queue import Empty
+import tkinter as tk
+
+from matplotlib.pyplot import grid
+
+# window=tk.Tk()
+# window.title(Sudoku Solver)
+# window.geometry("300x200+10+20")
+# window.mainloop()
+
+
 board = [
     [7,8,0,4,0,0,1,2,0],
     [6,0,0,0,7,5,0,0,9],
@@ -11,7 +22,7 @@ board = [
 ]
 
 # Print the Board
-def print_board(Puzzle):
+def printBoard(Puzzle):
     for x in range(len(Puzzle)):
         if x % 3 == 0 and x != 0:
             print("- - - - - - - - - - - - - ")
@@ -24,11 +35,25 @@ def print_board(Puzzle):
                 print(Puzzle[x][y])
             else:
                 print(str(Puzzle[x][y]) + " ", end="")
-# print_board(board)
+printBoard(board)
 
 def isEmpty(Puzzle):
     for x in range(len(Puzzle)):
-        for y in range(len(Puzzle[0])):
+        for y in range(len(Puzzle[x])):
             if Puzzle[x][y] == 0:
                 return (x, y)  # row, colum
 
+def emptyList(Puzzle):
+    gridList= []
+    for x in range(len(Puzzle)):
+        tupleList = []
+        for y in range(len(Puzzle[x])):
+            if Puzzle[x][y] == 0:
+                tupleList.append((x, y))
+        gridList.append(tupleList)
+    return gridList
+
+# def solve(Puzzle):
+
+#     find = isEmpty(Puzzle)
+    
