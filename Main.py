@@ -47,8 +47,9 @@ def printBoard(Puzzle):
                 print(str(Puzzle[x][y]) + " ", end="")\
 
 
-# determines whether the cell is empty
+
 def isEmpty(Puzzle):
+    '''determines whether the cell is empty'''
     for x in range(len(Puzzle)):
         for y in range(len(Puzzle[x])):
             if Puzzle[x][y] == 0:
@@ -114,6 +115,8 @@ def validNum(Puzzle, cell, num):
             if Puzzle[x][y] == num and (x, y) != cell:
                 return False
 
+    return True
+
 
 def solve(Puzzle):
     blank = isEmpty(Puzzle)
@@ -121,21 +124,29 @@ def solve(Puzzle):
         return True
 
     for num in range(1,10):
-        print(num)
         if validNum(Puzzle, blank, num):
-            Puzzle[blank[0], blank[1]] = num
-            print(Puzzle[blank[0]][blank[1]])
+
+            Puzzle[blank[0]][blank[1]] = num
 
             if solve(Puzzle):
                 return True
-            Puzzle[blank[0], blank[1]] = 0
-
-
+            Puzzle[blank[0]][blank[1]] = 0
 
     return False
 
+printBoard(board)
 solve(board)
 print(solve(board))
+printBoard(board)
+
+print("________________________________________________")
+
+blank = blankBoard()
+printBoard(blank)
+solve(blank)
+print(solve(blank))
+printBoard(blank)
+
 
 
 # checks validity of number in cell by comparing across row, column, and box
