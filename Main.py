@@ -7,19 +7,28 @@ from matplotlib.pyplot import grid
 # window.title(Sudoku Solver)
 # window.geometry("300x200+10+20")
 # window.mainloop()
+if __name__ == '__main__':
+    board = [
+        [7, 8, 0, 4, 0, 0, 1, 2, 0],
+        [6, 0, 0, 0, 7, 5, 0, 0, 9],
+        [0, 0, 0, 6, 0, 1, 0, 7, 8],
+        [0, 0, 7, 0, 4, 0, 2, 6, 0],
+        [0, 0, 1, 0, 5, 0, 9, 3, 0],
+        [9, 0, 4, 0, 6, 0, 0, 0, 5],
+        [0, 7, 0, 3, 0, 0, 0, 1, 2],
+        [1, 2, 0, 0, 0, 7, 4, 0, 0],
+        [0, 4, 9, 2, 0, 6, 0, 0, 7]
+    ]
 
 
-board = [
-    [7, 8, 0, 4, 0, 0, 1, 2, 0],
-    [6, 0, 0, 0, 7, 5, 0, 0, 9],
-    [0, 0, 0, 6, 0, 1, 0, 7, 8],
-    [0, 0, 7, 0, 4, 0, 2, 6, 0],
-    [0, 0, 1, 0, 5, 0, 9, 3, 0],
-    [9, 0, 4, 0, 6, 0, 0, 0, 5],
-    [0, 7, 0, 3, 0, 0, 0, 1, 2],
-    [1, 2, 0, 0, 0, 7, 4, 0, 0],
-    [0, 4, 9, 2, 0, 6, 0, 0, 7]
-]
+def blankBoard():
+    board = []
+    for x in range(9):
+        row = []
+        for y in range(9):
+            row.append(0)
+        board.append(row)
+    return board
 
 
 # prints the unsolved sudoku puzzle
@@ -104,6 +113,29 @@ def validNum(Puzzle, cell, num):
         for y in range(startY, startY + 3):
             if Puzzle[x][y] == num and (x, y) != cell:
                 return False
+
+
+def solve(Puzzle):
+    blank = isEmpty(Puzzle)
+    if not blank:
+        return True
+
+    for num in range(1,10):
+        print(num)
+        if validNum(Puzzle, blank, num):
+            Puzzle[blank[0], blank[1]] = num
+            print(Puzzle[blank[0]][blank[1]])
+
+            if solve(Puzzle):
+                return True
+            Puzzle[blank[0], blank[1]] = 0
+
+
+
+    return False
+
+solve(board)
+print(solve(board))
 
 
 # checks validity of number in cell by comparing across row, column, and box
