@@ -38,6 +38,13 @@ def printBoard(Puzzle):
                 print(str(Puzzle[x][y]) + " ", end="")\
 
 
+def isEmpty(Puzzle):
+    for x in range(len(Puzzle)):
+        for y in range(len(Puzzle[x])):
+            if Puzzle[x][y] == 0:
+                return (x, y)
+
+
 # create a nested list with each list representing a row and each value being the coordinate of an empty cell
 def emptyMatrix(Puzzle):
     gridList = []
@@ -48,6 +55,30 @@ def emptyMatrix(Puzzle):
                 tupleList.append((x, y))
         gridList.append(tupleList)
     return gridList
+
+
+def connectRows(Puzzle, cell):
+    row = Puzzle[cell[1]]
+    for i in row:
+        if i == cell:
+
+
+# checks validity of number in cell by comparing across row, column, and box
+# def validNum(Puzzle, num, pos):
+#     for x in range(len(Puzzle[0])):  # checks validity across all cells in row
+#         if Puzzle[pos[0]][x] == num and pos[1] != x:
+#             return False
+#     for y in range(len(Puzzle)):  #checks validity across all cells in column
+#         if Puzzle[y][pos[1]] == num and pos[0] != y:
+#             return False
+
+#     box_x = pos[1] // 3   # determines which box horizontally
+#     box_y = pos[0] // 3   # determines which box vertically
+#
+#     for i in range(box_y*3, box_y*3 + 3):  # checks validity across all cells in box
+#         for j in range(box_x * 3, box_x*3 + 3):
+#             if Puzzle[i][j] == num and (i,j) != pos:
+#                 return False
 
 
 # def isEmpty(Puzzle):
@@ -73,21 +104,5 @@ def emptyMatrix(Puzzle):
 #     return False
 
 
-# checks validity of number in cell by comparing across row, column, and box
-# def validNum(Puzzle, num, pos):
-#     for x in range(len(Puzzle[0])):  # checks validity across all cells in row
-#         if Puzzle[pos[0]][x] == num and pos[1] != x:
-#             return False
-#     for y in range(len(Puzzle)):  #checks validity across all cells in column
-#         if Puzzle[y][pos[1]] == num and pos[0] != y:
-#             return False
-
-#     box_x = pos[1] // 3   # determines which box horizontally
-#     box_y = pos[0] // 3   # determines which box vertically
-#
-#     for i in range(box_y*3, box_y*3 + 3):  # checks validity across all cells in box
-#         for j in range(box_x * 3, box_x*3 + 3):
-#             if Puzzle[i][j] == num and (i,j) != pos:
-#                 return False
 #
 #     return True
