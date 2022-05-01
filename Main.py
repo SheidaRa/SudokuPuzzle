@@ -22,7 +22,7 @@ board = [
 ]
 
 
-# print the board
+# prints the unsolved sudoku puzzle
 def printBoard(Puzzle):
     for x in range(len(Puzzle)):
         if x % 3 == 0 and x != 0:
@@ -38,29 +38,72 @@ def printBoard(Puzzle):
                 print(str(Puzzle[x][y]) + " ", end="")\
 
 
+# determines whether the cell is empty
 def isEmpty(Puzzle):
     for x in range(len(Puzzle)):
         for y in range(len(Puzzle[x])):
             if Puzzle[x][y] == 0:
-                return (x, y)
+                return (x,y)
 
 
 # create a nested list with each list representing a row and each value being the coordinate of an empty cell
-def emptyMatrix(Puzzle):
+def emptyMatrix(Puzzle): # not needed in a recursive function
     gridList = []
     for x in range(len(Puzzle)):
         tupleList = []
         for y in range(len(Puzzle[x])):
             if Puzzle[x][y] == 0:
-                tupleList.append((x, y))
+                tupleList.append((x,y))
         gridList.append(tupleList)
     return gridList
 
 
-def connectRows(Puzzle, cell):
-    row = Puzzle[cell[1]]
-    for i in row:
-        if i == cell:
+# checks validity of the cell across neighbors in the row
+def validRow(Puzzle, cell, num):
+    for a in range(len(Puzzle)):
+        if Puzzle[cell[0]][a] == num and (cell[0], a) != cell:
+            return False
+
+
+# checks validity of the cell across neighbors in the column
+def validCol(Puzzle, cell, num):
+    for b in range(len(Puzzle)):
+        if Puzzle[b][cell[1]] == num and (b, cell[1]) != cell:
+            return False
+
+
+# checks validity of the cell across neighbors in the box
+def validBox(Puzzle, cell, num):
+    startX = cell[0] - cell[0] % 3
+    startY = cell[1] - cell[1] % 3
+
+    for x in range(startX, startX + 3):
+        for y in range(startY, startY + 3):
+            if Puzzle[x][y] == num and (x,y) != cell:
+                return False
+
+
+# condensed validRow, validCol, and validBox
+'''
+Couldn't run validRow, validCol, and validBox within validNum. Calls to the function either return None or False.
+Using if statement with the function would end validNum early.
+'''
+def validNum(Puzzle, cell, num):
+    for a in range(len(Puzzle)):
+        if Puzzle[cell[0]][a] == num and (cell[0], a) != cell:
+            return False
+
+    for b in range(len(Puzzle)):
+        if Puzzle[b][cell[1]] == num and (b, cell[1]) != cell:
+            return False
+
+    startX = cell[0] - cell[0] % 3
+    startY = cell[1] - cell[1] % 3
+
+    for x in range(startX, startX + 3):
+        for y in range(startY, startY + 3):
+            if Puzzle[x][y] == num and (x, y) != cell:
+                return False
 
 
 # checks validity of number in cell by comparing across row, column, and box
