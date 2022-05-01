@@ -106,6 +106,26 @@ def validNum(Puzzle, cell, num):
                 return False
 
 
+#Solves the Puzzle
+def solve():
+    for x in range(0, 9):
+        for y in range(0, 9):
+            if puzzle[x][y] == 0:
+                for num in range(1, 10):
+                    if validNum(Puzzle, cell, num):
+                        solve()
+
+
+
+
+
+
+
+
+
+
+
+
 # checks validity of number in cell by comparing across row, column, and box
 # def validNum(Puzzle, num, pos):
 #     for x in range(len(Puzzle[0])):  # checks validity across all cells in row
