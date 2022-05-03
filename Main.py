@@ -8,6 +8,8 @@ from matplotlib.pyplot import grid
 # window.geometry("300x200+10+20")
 # window.mainloop()
 if __name__ == '__main__':
+
+
     board = [
         [7, 8, 0, 4, 0, 0, 1, 2, 0],
         [6, 0, 0, 0, 7, 5, 0, 0, 9],
@@ -149,46 +151,3 @@ printBoard(blank)
 
 
 
-# checks validity of number in cell by comparing across row, column, and box
-# def validNum(Puzzle, num, pos):
-#     for x in range(len(Puzzle[0])):  # checks validity across all cells in row
-#         if Puzzle[pos[0]][x] == num and pos[1] != x:
-#             return False
-#     for y in range(len(Puzzle)):  #checks validity across all cells in column
-#         if Puzzle[y][pos[1]] == num and pos[0] != y:
-#             return False
-
-#     box_x = pos[1] // 3   # determines which box horizontally
-#     box_y = pos[0] // 3   # determines which box vertically
-#
-#     for i in range(box_y*3, box_y*3 + 3):  # checks validity across all cells in box
-#         for j in range(box_x * 3, box_x*3 + 3):
-#             if Puzzle[i][j] == num and (i,j) != pos:
-#                 return False
-
-
-# def isEmpty(Puzzle):
-#     for x in range(len(Puzzle)):
-#         for y in range(len(Puzzle[x])):
-#             if Puzzle[x][y] == 0:
-#                 return True  # row, column
-
-
-# def solve(Puzzle):
-#     empty = isEmpty(Puzzle)
-#     if not empty:
-#         return True
-#     else:
-#         row, col = empty
-#     for i in range(1,10):
-#         if emptyMatrix(Puzzle):
-#             Puzzle[row][col] = i
-#             if solve(Puzzle):
-#                 return True
-#             Puzzle[row][col] = 0
-#
-#     return False
-
-
-#
-#     return True
